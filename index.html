@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./snake.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.2/dist/tfjs-vis.umd.min.js"></script>
+
+    <title>Snake Game</title>
+</head>
+
+<body style="margin: 0px; background-color: whitesmoke; ">
+
+    <header id="header" style="display: flex; flex-direction: row; justify-content: space-evenly;">
+        <img id="headerlegend" src="./assets/headerlegend.png" alt="" style="height: 100px;">
+        <div id="score" style="margin-right: 6%; margin-left: 8%;">
+            Score: 0
+        </div>
+        <div id="generation" style="display: none; margin-left: 5%; margin-right: 5%;">
+            Generation: 1
+        </div>
+        <div id="slidecontainer" style="display: flex; flex-direction: row;">
+            <div style="display: flex; flex-direction: column;">
+                <div style="display: flex; flex-direction: row;">
+                    <h5>Mutation Rate &nbsp &nbsp&nbsp&nbsp</h5>
+                    <input type="range" min="2" max="50" value="20" class="slider" id="rate">
+                    <h5 id="rateValue">5 %</h5>
+                </div>
+                <p style="font-size: 14px; margin: 0px">This represents how many DNA of genes will be changed/mutated
+                </p>
+                <div style="display: flex; flex-direction: row;">
+                    <h5>Mutation Change&nbsp</h5>
+                    <input type="range" min="1" max="30" value="10" class="slider" id="change">
+                    <h5 id="changeValue">&nbsp 5 %</h5>
+                </div>
+                <p style="font-size: 14px; margin: 0px">This represents by what percent a single DNA will be
+                    changed/mutated</p>
+            </div>
+            <h6 style="color: red; text-align: center; max-width: 20%; justify-content: center; align-self: center;">
+                These values are at optimum values, abnormal changes might make the species extinct!</h6>
+        </div>
+        <div id="timer" style="margin-right: 13%; display: none;">
+            Time: 0:0
+        </div>
+    </header>
+
+    <div id="canvasContainer">
+        <canvas id="snake">
+        </canvas>
+    </div>
+    <div class="bg-modal">
+        <div id="modal-content" style="display: flex;">
+            <div class="heading">
+                <h2 style="padding-top: 2.5%;padding-right: 2px">Welcome to the Snake AI!</h2>
+                <img class="simage" src="./assets/snake.png">
+            </div>
+            <img class="control" src="./assets/ModifiedControls.png">
+            <h3 style="margin-top: 2%;">Choose Game Mode:</h3>
+            <div class="choosePlay">
+                <div class="buttons">
+                    <button id="playAI" type="button" class="btn btn-primary"
+                        style="width: 150px;font-size:x-large ">Logical AI</button>
+                    <h5 class="description">Uses A*, reverse A* algorithms to solve the game automatically</h5>
+                </div>
+                <div class="buttons">
+                    <button id="Manual" type="button" class="btn btn-primary"
+                        style="width: 150px; margin-left: 10%; margin-right: 10%; font-size: x-large ">Manual
+                        Play</button>
+                    <h5 class="description">Arcade Nostalgia</h5>
+                </div>
+                <div class="buttons">
+                    
+                    <button id="genetic" type="button" class="btn btn-primary" style="width: 150px;font-size: x-large ">
+                        Genetic Evolution
+                    </button>
+                    <h5 class="description" style="text-align: center;" >Snakes follow Darwin law<br>Machine learning using Deep NeuroEvolution</h5>'
+                </div>
+            </div>
+        </div>
+        <div id="geneticModal" style="display: none;">
+            <div style="display: flex; flex-direction: row;">
+                <h1 style="display: flex; align-self: center;">
+                    "Survival of the fittest"
+                </h1>
+                <div style="display: flex; flex-direction: column;">
+                    <img src="./assets/darwin.jpg" alt="" srcset="">
+                    <h6>Charles Darwin</h6>
+                </div>
+            </div>
+            <p style="font-size: 20px; font-weight: 400;">This is the basis of evolution. The snakes will follow the
+                same law, evolve and gradually learn to play. There are 20 snakes playing at once (known as a
+                generation). Each snake has it's unique brain which is a neural network. The snakes which survies the
+                best in this generation will have more ability to pass its characteristics (or genes) to the next
+                generation (This is analogus to natural selection). Thus, a new generation formed will have more
+                developed brains than the previous generation. The new generation also change their inherited genes a
+                little bit so that they can discover new survival possibilities. (This is analogus to mutation). The
+                snakes are partially trained already, and you can see the snakes performing better as time passes.
+            </p>
+            <button id="continue" type="button" class="btn btn-primary" style="width: 150px;font-size: x-large ">
+                Continue
+            </button>
+        </div>
+    </div>
+    <script src="./snake.js" type="module"></script>
+</body>
+
+
+</html>
